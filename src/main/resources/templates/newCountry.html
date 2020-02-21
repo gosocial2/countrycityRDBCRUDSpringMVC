@@ -17,6 +17,9 @@
 
             <nav th:replace="fragments/mainLayout :: header">
             </nav>
+            
+            <aside th:replace="fragments/mainLayout :: sidebar">
+            </aside>
 
             <!-- Content Wrapper. Contains page content -->
             <main th:insert="fragments/mainLayout :: content(title=${pageTitle}, value=~{ :: #country_form_card})">    
@@ -32,9 +35,10 @@
                                   th:action="@{/country/create}"
                                   th:object="${country}" method="post">
                                 <div class="card-body">
+                                    
                                     <div class="col-md-11" th:replace="countryForm :: formFields">
-                                            
                                     </div><!--//.col -->
+                                    
                                 </div>
                                 <div class="card-footer">
                                     

@@ -17,6 +17,9 @@
 
             <nav th:replace="fragments/mainLayout :: header">
             </nav>
+            
+            <aside th:replace="fragments/mainLayout :: sidebar">
+            </aside>
 
             <!-- Content Wrapper. Contains page content -->
             <main th:insert="fragments/mainLayout :: content(title=${pageTitle}, value=~{ :: #city_form_card})">    
