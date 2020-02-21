@@ -24,7 +24,7 @@
                                             
                                              <div class="form-group row">
                                                 <label for="countryCode" class="col-form-label">Country</label> 
-                                                <select th:object="${city}" class="form-control" th:field="*{country}"  id="countryCode" name="countryCode">
+                                                <select th:object="${city}" class="form-control select2bs4" th:field="*{country}"  id="countryCode" name="countryCode">
                                                     <option value="">Please select a country...</option>
                                                     <option th:each="country : ${countryList}"
                                                             th:value="${country.isoCode}"
