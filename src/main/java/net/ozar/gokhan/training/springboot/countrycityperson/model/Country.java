@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,6 +47,7 @@ public class Country implements Serializable {
     private String isoCode;
     @Basic(optional = false)
     @NotNull
+    @NotBlank
     @Size(min = 2, max = 60)
     @Column(name = "country_name", nullable = false, length = 60)
     private String countryName;

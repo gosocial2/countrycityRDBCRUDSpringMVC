@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org/">
     <!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
     <head th:replace="fragments/mainLayout :: head(~{this :: title}, ~{this :: .custom-link})">
-        <title>Countries</title>
+        <title>New Country</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -29,14 +29,14 @@
                     <div  class="container-fluid">
                         <div class="card card-info" id="country_form_card">
                             <div class="card-header">
-                                <h3 class="card-title" id="module_title">Country</h3>
+                                <h3 class="card-title" id="module_title">New Country</h3>
                             </div> 
                             <form action="#"
-                                  th:action="@{/country/update/{isoCode}(isoCode=${country.isoCode})}"
+                                  th:action="@{/country/create}"
                                   th:object="${country}" method="post">
                                 <div class="card-body">
                                     
-                                    <div class="col-md-11" th:replace="countryForm :: formFields">
+                                    <div class="col-md-11" th:replace="country/countryForm :: formFields">
                                     </div><!--//.col -->
                                     
                                 </div>

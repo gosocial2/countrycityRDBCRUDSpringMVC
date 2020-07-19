@@ -1,3 +1,26 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2020 Gökhan Ozar <gosocial2@ozar.net>.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package net.ozar.gokhan.training.springboot.countrycityperson.controller;
 
 import java.util.ArrayList;
@@ -25,7 +48,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
- * @author Ozar <gosocial2@ozar.net>
+ * @author Gökhan Ozar <gosocial2@ozar.net>
  */
 @Controller
 @RequestMapping("/city")
@@ -52,6 +75,7 @@ public class CityWebController {
 
         mav.addObject("cities", cities);
         mav.addObject("pageTitle", "City List");
+        mav.addObject("moduleName", "city");
         return mav;
     }
     
@@ -64,6 +88,7 @@ public class CityWebController {
         mav.addObject("city", new City());
         mav.addObject("countryList", countries);
         mav.addObject("pageTitle", "Adding a New City");
+        mav.addObject("moduleName", "city");
         
         return mav;
     }
@@ -98,14 +123,14 @@ public class CityWebController {
         }
         List<Country> countries = countryRepo.findAll();
         if (countries == null) {
-            countries = new ArrayList<Country>();
+            countries = new ArrayList<>();
         }
         
         mav.addObject("city", city);
         mav.addObject("countryList", countries);
+        mav.addObject("moduleName", "city");
         if (city.getId() != null)
             mav.addObject("pageTitle", "Edit City "+city.getCityName());
-        
         return mav;
     }
 
@@ -114,7 +139,7 @@ public class CityWebController {
             Model model) {
         if (result.hasErrors()) {
             city.setId(id);
-            return "city/editCity";
+            return "redirect:/city/edit/"+id;
         }
 
         repo.save(city);

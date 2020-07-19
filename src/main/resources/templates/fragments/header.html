@@ -64,13 +64,13 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="/country/list" th:href="@{/country/list}" class="nav-link" th:classappend="${ not #strings.isEmpty(module) AND module == 'country'} ? active : ''">
+                                        <a href="/country/list" th:href="@{/country/list}" class="nav-link" th:classappend="${ not #strings.isEmpty(moduleName) AND moduleName == 'country'} ? active : ''">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Countries</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/city/list" th:href="@{/city/list}" class="nav-link" th:classappend="${ not #strings.isEmpty(module) AND module == 'city'} ? active : ''">
+                                        <a href="/city/list" th:href="@{/city/list}" class="nav-link" th:classappend="${ not #strings.isEmpty(moduleName) AND moduleName == 'city'} ? active : ''">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Cities</p>
                                         </a>

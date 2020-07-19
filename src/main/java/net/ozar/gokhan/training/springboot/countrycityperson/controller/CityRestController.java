@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2020 Gökhan Ozar <gosocial2@ozar.net>.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package net.ozar.gokhan.training.springboot.countrycityperson.controller;
 
@@ -31,7 +49,7 @@ import net.ozar.gokhan.training.springboot.countrycityperson.repo.CityRepository
  * @author Ozar <gosocial2@ozar.net>
  */
 @RestController
-@RequestMapping("/city-api")
+@RequestMapping("/api/cities")
 public class CityRestController {
     
     @Autowired
@@ -40,7 +58,7 @@ public class CityRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CityRestController.class);
     
    
-    @RequestMapping(value="/cities/", method = RequestMethod.GET)
+    @RequestMapping(value="/list/", method = RequestMethod.GET)
     public List<City> list() {
         List<City> cList = repo.findAll();
         cList.forEach((c) -> {
@@ -50,7 +68,7 @@ public class CityRestController {
     }
     
     // @GetMapping("/{id}")
-    @RequestMapping(value="/cities/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public City get(@PathVariable("id") Integer id) {
         LOGGER.info("Looking up city by id (as ID): "+id);
         Optional<City> foundCity = null;
@@ -75,14 +93,14 @@ public class CityRestController {
         return null;
     }
     */
-    @RequestMapping(value="/cities/", method = RequestMethod.PUT)
+    @RequestMapping(value="/", method = RequestMethod.PUT)
     public City updateCity(@RequestBody City city) {
         return repo.save(city);
     }
     
     // @PostMapping
     // public ResponseEntity<?> post(@RequestBody City input) {
-    @RequestMapping(value="/cities/", method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST)
     public City createProduct(@RequestBody City city) {
         City savedResult = repo.save(city);
         return savedResult;

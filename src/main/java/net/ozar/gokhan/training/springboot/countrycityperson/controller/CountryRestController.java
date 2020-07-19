@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2020 Gökhan Ozar <gosocial2@ozar.net>.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package net.ozar.gokhan.training.springboot.countrycityperson.controller;
 
@@ -28,10 +46,10 @@ import net.ozar.gokhan.training.springboot.countrycityperson.repo.CountryReposit
 
 /**
  *
- * @author Ozar <gosocial2@ozar.net>
+ * @author Gökhan Ozar <gosocial2@ozar.net>
  */
 @RestController
-@RequestMapping("/country-api")
+@RequestMapping("/api/countries")
 public class CountryRestController {
     
     @Autowired
@@ -40,7 +58,7 @@ public class CountryRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CountryRestController.class);
     
     // @GetMapping()
-    @RequestMapping(value="/countries/", method = RequestMethod.GET)
+    @RequestMapping(value="/list/", method = RequestMethod.GET)
     public List<Country> list() {
         List<Country> cList = repo.findAll();
         for(Country c : cList) {
@@ -50,7 +68,7 @@ public class CountryRestController {
     }
     
     // @GetMapping("/{id}")
-    @RequestMapping(value="/countries/{isoCode}", method = RequestMethod.GET)
+    @RequestMapping(value="/{isoCode}", method = RequestMethod.GET)
     public Country get(@PathVariable("isoCode") String isoCode) {
         LOGGER.info("Looking up country by isoCode (as ID): "+isoCode);
         Optional<Country> foundCountry = null;
@@ -75,14 +93,14 @@ public class CountryRestController {
         return null;
     }
     */
-    @RequestMapping(value="/countries/", method = RequestMethod.PUT)
+    @RequestMapping(value="/", method = RequestMethod.PUT)
     public Country updateCountry(@RequestBody Country country) {
         return repo.save(country);
     }
     
     // @PostMapping
     // public ResponseEntity<?> post(@RequestBody Country input) {
-    @RequestMapping(value="/countries/", method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST)
     public Country createProduct(@RequestBody Country country) {
         Country savedResult = repo.save(country);
         return savedResult;

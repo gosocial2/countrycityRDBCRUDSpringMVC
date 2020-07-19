@@ -1,3 +1,26 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2020 Gökhan Ozar <gosocial2@ozar.net>.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package net.ozar.gokhan.training.springboot.countrycityperson.controller;
 
 import java.util.List;
@@ -21,7 +44,7 @@ import net.ozar.gokhan.training.springboot.countrycityperson.repo.CountryReposit
 
 /**
  *
- * @author Ozar <gosocial2@ozar.net>
+ * @author Gökhan Ozar <gosocial2@ozar.net>
  */
 @Controller
 @RequestMapping("/country")
@@ -32,13 +55,6 @@ public class CountryWebController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CountryWebController.class);
 
-    /*
-    @RequestMapping("/countries")
-    public String page(Model model) {
-        model.addAttribute("attribute", "value");
-        return "view.name";
-    }
-     */
     @ExceptionHandler({Exception.class})
     public String databaseError() {
         return "error";
@@ -46,12 +62,13 @@ public class CountryWebController {
 
     @RequestMapping("/list")
     public ModelAndView getCountries() {
-        ModelAndView mav = new ModelAndView("countryList");
+        ModelAndView mav = new ModelAndView("country/countryList");
 
         List<Country> countries = repo.findAll();
 
         mav.addObject("countries", countries);
         mav.addObject("pageTitle", new String("Country List"));
+        mav.addObject("moduleName", "country");
         return mav;
     }
 
@@ -82,7 +99,8 @@ public class CountryWebController {
             country = new Country();
         }
         model.addAttribute("country", country);
-        return "editCountry";
+        model.addAttribute("moduleName", "country");
+        return "country/editCountry";
     }
 
     @PostMapping("update/{isoCode}")
@@ -90,7 +108,7 @@ public class CountryWebController {
             Model model) {
         if (result.hasErrors()) {
             country.setIsoCode(isoCode);
-            return "editCountry";
+            return "country/editCountry";
         }
 
         repo.save(country);
@@ -100,11 +118,7 @@ public class CountryWebController {
 
     @GetMapping("delete/{id}")
     public String deleteCountry(@PathVariable("id") String id, Model model) {
-        /*
-        Country country = repo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid country Id:" + id));
-        repo.delete(country);        
-                */
+        
         repo.deleteById(id);
         return "redirect:/country/list";
     }
@@ -112,7 +126,7 @@ public class CountryWebController {
     @PostMapping("create")
     public String createCountry(@Valid Country country, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "newCountry";
+            return "country/newCountry";
         }
         repo.save(country);
         return "redirect:/country/list";
@@ -121,7 +135,8 @@ public class CountryWebController {
     @GetMapping("new")
     public String newCountry(Model model) {
         model.addAttribute("country", new Country());
-        return "newCountry";
+        model.addAttribute("moduleName", "country");
+        return "country/newCountry";
     }
 
 }

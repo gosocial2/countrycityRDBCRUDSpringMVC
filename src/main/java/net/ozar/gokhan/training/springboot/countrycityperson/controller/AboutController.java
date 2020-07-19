@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2020 Gökhan Ozar <gosocial2@ozar.net>.
+ * Copyright 2020 Ozar <gosocial2@ozar.net>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,19 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.ozar.gokhan.training.springboot.countrycityperson.repo;
+package net.ozar.gokhan.training.springboot.countrycityperson.controller;
 
-import net.ozar.gokhan.training.springboot.countrycityperson.model.City;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author Ozar <gosocial2@ozar.net>
+ * @author Gökhan Ozar <gosocial2@ozar.net>
  */
-@Repository
-public interface CityRepository extends JpaRepository<City, Integer> {
+@Controller
+public class AboutController {
     
-    int deleteByCityName(String cityName);
+    @RequestMapping("/about")
+    public String diplayAboutPage(Model model) {
+        model.addAttribute("pageTitle", "Country & City");
+        return "about";
+    }
+    
     
 }

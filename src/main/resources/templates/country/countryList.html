@@ -2,10 +2,9 @@
 <html xmlns:th="https://www.thymeleaf.org/">
     <!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
     <head th:replace="fragments/mainLayout :: head(~{this :: title}, ~{this :: .custom-link})">
-        <title>Countries</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <title>Countries</title>
         <!-- DataTables -->
         <link class="custom-link" rel="stylesheet" href="../../static/plugins/datatables-bs4/css/dataTables.bootstrap4.css" th:href="@{/static/plugins/datatables-bs4/css/dataTables.bootstrap4.css}">
 
